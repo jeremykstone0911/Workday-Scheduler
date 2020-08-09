@@ -30,6 +30,63 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+      <!-- Inside the container there are 9 rows, one for each timeslot -->
+        <!-- Each row has 3 columns (the time, the event and a save button) -->
+        <!-- Styling was using bootstrap's CSS grid layout and other predefined classes -->
+
+        <div class="row">
+          <!-- The Div class is the time slot -->
+          <div class="col-1 border-top text-right pt-3">9AM</div>
+          <!-- The input allows the user to input an event to be stored in the planner -->
+          <!-- The input tag contains an id, time attribute and position attribute -->
+          <!-- The id is used to select the input, the time is used to get a value to compare for time in the script -->
+          <!-- Position is used to know which time slot each one is in the script  -->
+          <input id="nine" class="col-10 border-top border-right border-left" time="9" position="0">
+          <!-- The button is used to save the event the user inputed  -->
+          <!-- The data-targetInput is used to associate the button with the input in the script -->
+          <button type="button" data-targetInput="#nine" class="col-1 btn btn-info"></button>
+      </div>
+
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">10AM</div>
+          <input id="ten" class="col-10 border-top border-right border-left time" time="10" position="1">
+          <button id="button-10" type="button" data-targetInput="#ten" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">11AM</div>
+          <input id="eleven" class="col-10 border-top border-right border-left time" time="11" position="2">
+          <button id="button-11" type="button" data-targetInput="#eleven" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">12PM</div>
+          <input id="twelve" class="col-10 border-top border-right border-left time" time="12" position="3">
+          <button id="button-12" type="button" data-targetInput="#twelve" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">1PM</div>
+          <input id="one" class="col-10 border-top border-right border-left time" time="13" position="4">
+          <button id="button-13" type="button" data-targetInput="#one" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">2PM</div>
+          <input id="two" class="col-10 border-top border-right border-left time" time="14" position="5">
+          <button id="button-14" type="button" data-targetInput="#two" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">3PM</div>
+          <input id="three" class="col-10 border-top border-right border-left time" time="15" position="6">
+          <button id="button-15" type="button" data-targetInput="#three" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">4PM</div>
+          <input id="four" class="col-10 border-top border-right border-left time" time="16" position="7">
+          <button id="button-16" type="button" data-targetInput="#four" class="col-1 btn btn-info"></button>
+      </div>
+      <div class="row">
+          <div class="col-1 border-top text-right pt-3">5PM</div>
+          <input id="five" class="col-10 border-top border-right border-left time" time="17" position="8">
+          <button id="button-17" type="button" data-targetInput="#five" class="col-1 btn btn-info"></button>
+      </div>
       <div class="col-sm-1 saveBtn"></div>
       </div>
     </div>

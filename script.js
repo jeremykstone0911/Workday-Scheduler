@@ -1,37 +1,111 @@
-//Header displays current time
-// The current day//
-window.onload = function () {
-  var today = new Date();
-  date = moment().format("LL");
+// On ready function used to allow the html page to fully load before intiating updates to the DOM
+$(document).ready(function () {
+  // Create an array with the days of the week
+  let daysOfTheWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-  $("#currentDay").html(date);
-};
+  // Create an array with the months of the year
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
-var workHours = [
-  "9AM",
-  "10AM",
-  "11AM",
-  "12PM",
-  "1PM",
-  "2PM",
-  "3PM",
-  "4PM",
-  "5PM",
-];
+  // Create a variable to define a new date
+  let date = new Date();
 
-//example code for setting up a timer
-//setinterval requires two parameters - function, and the time that you want it to run
-setInterval(function () {
-  //whatever you want to have run on a regularly scheduled time
-  //in this instance it's updating the currentDay div
-  $("#currentDay").text(moment().format("MMMM Do YYYY, h:mm:ss a"));
-  //then set how often you want the above code to run:
-}, 1000);
+  // Retrieve the day of the week from the array using the get day function for the index
+  let dayOfTheWeek = daysOfTheWeek[date.getDay()];
 
-//8 divs representing each hour from 9-5
+  // Retrieve the month of the year from the array using the get month function for the index
+  let month = months[date.getMonth()];
 
-//grey divs before the present; red divs for current hour; green divs for future
+  // Retrieve the date using the get date function
+  let day = date.getDate();
 
-//third column is save which saves to local storage
+  // Retrieve the year using the get year function
+  let year = date.getFullYear();
 
-//
+  // Concatenate the full date into a variable
+  let completeDate = dayOfTheWeek + ", " + month + " " + day + ", " + year;
+
+  // Select the paragraph with the CurrentDay id to insert the full date
+  $("#currentDay").text(completeDate);
+
+  // Set a variable equal to the current hour
+  let currentHour = date.getHours();
+
+  // Create an empty array to store inputs
+  let listOfInputs = [];
+
+  // Retrieve the userInputs key or else create an empty array
+  // The local storage is parsed into an object
+  let listOfInputsStored = JSON.parse(localStorage.getItem("userInputs")) || [];
+
+  // Create a for loop to iterate through the input tags
+  for (let i = 0; i < $("input").length; i++) {
+    // Define a saveIcon variable equal to selecting all the button elements in the HTML
+    let saveIcon = $("button");
+
+    // Add the icon to each button
+    saveIcon.addClass("fa fa-save");
+
+    // Select each input element
+    let elem = $("input")[i];
+
+    // Store the value of each element into local storage
+    $(elem).val(listOfInputsStored[i]);
+
+    // Push the value into the empty array
+    listOfInputs.push($(elem).val());
+
+    // Compare the current hour to to the time slot
+    // If it's the same, make the input box red
+    if (currentHour === Number($(elem).attr("time"))) {
+      $(elem).addClass("bg-danger");
+    }
+    // If the current hour is past the time slot, make the input box light grey
+    else if (currentHour > Number($(elem).attr("time"))) {
+      $(elem).addClass("bg-light");
+    }
+    // If it's before the time slot make the input box green
+    else if (currentHour < Number($(elem).attr("time"))) {
+      $(elem).addClass("bg-success");
+    }
+  }
+
+  // Select all buttons for an on click event
+  $("button").click(function () {
+    // Retrieve the data target input property and set it to buttonFor
+    // Each button corresponds to a specific input value to save
+    let buttonFor = $(this).data("targetinput");
+
+    // Find the position attribute of the specific button
+    let position = $(buttonFor).attr("position");
+
+    // Using the button clicked on get the the associated input
+    let inputVal = $(buttonFor).val();
+
+    // Set the value of the input to the specified position in the listOfInputs array
+    listOfInputs[position] = inputVal;
+
+    // Set the updated array into local storage
+    localStorage.setItem("userInputs", JSON.stringify(listOfInputs));
+  });
+});
